@@ -20,8 +20,25 @@ public class LoginClass {
     private By Click_On_SignIn_Btn=By.xpath("//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[2]/android.widget.Button");
     private By Click_On_Company=By.xpath("//android.widget.EditText");
     private By Click_On_Enter_Btn=By.xpath("//android.widget.Button");
+    private By Click_On_Forgot_password=By.xpath("//android.widget.TextView[@text=\"Forgot Password?\"]");
+    private By EnterRegisterdEmail=By.xpath("//android.widget.EditText");
+    private By ClickOnSendButton=By.xpath("//android.widget.Button");
+    private By PrintSuccessmsg=By.xpath("//android.widget.TextView[@text=\"Didn't receive the link?\"]");
     
     
+    
+	public By getPrintSuccessmsg() {
+		return PrintSuccessmsg;
+	}
+	public By getClickOnSendButton() {
+		return ClickOnSendButton;
+	}
+	public By getEnterRegisterdEmail() {
+		return EnterRegisterdEmail;
+	}
+	public By getClick_On_Forgot_password() {
+		return Click_On_Forgot_password;
+	}
 	public By getClick_On_Enter_Btn() {
 		return Click_On_Enter_Btn;
 	}

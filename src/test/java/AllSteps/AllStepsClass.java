@@ -9,9 +9,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -26,8 +29,6 @@ import io.cucumber.java.en.*;
 import pages.LoginClass;
 
 public class AllStepsClass extends ParentClass {
-	
-
 	
 	@Before
 	public void setUp() throws MalformedURLException, InterruptedException {
@@ -50,16 +51,12 @@ public class AllStepsClass extends ParentClass {
 		System.out.println("Device started");
 		driver.findElement(login.getClick_On_Skip()).click();	
 	}
-	
-
-	
 	@Given("Click on Signin button")
 	public void click_on_signin_button() throws InterruptedException {
 		Thread.sleep(5000);
 	    driver.findElement(login.getClick_On_SignIn_Btn()).click();
 		
 	}
-
 	@Given("Select the company")
 	public void select_the_company() throws InterruptedException {
 		Thread.sleep(5000);
@@ -77,17 +74,38 @@ public class AllStepsClass extends ParentClass {
 	    swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 	    driver.perform(Arrays.asList(swipe));	
 	}
-
 	@Then("User should be able to view the dashboard page")
 	public void user_should_be_able_to_view_the_dashboard_page() throws InterruptedException {
 		Thread.sleep(5000);
 		driver.findElement(login.getClick_On_Enter_Btn()).click();
 	    System.out.println("No company");
+	    driver.navigate().back();
 	}
-	
-//	@After
+	@Given("Click on forgot password")
+	public void click_on_forgot_password() {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(login.getClick_On_Forgot_password())).click();	
+	}
+	@Given("Enter registered email in email text field")
+	public void enter_registered_email_in_email_text_field() throws InterruptedException {
+		Thread.sleep(4000);
+	    driver.findElement(login.getEnterRegisterdEmail()).sendKeys("rams94000@gmail.com");   
+	}
+	@Given("Click on send button")
+	public void click_on_send_button() throws InterruptedException {
+		Thread.sleep(4000);
+	    driver.findElement(login.getClickOnSendButton()).click();
+	}
+	@Then("User should be able to receive email")
+	public void user_should_be_able_to_receive_email() throws InterruptedException {
+		Thread.sleep(7000);
+		WebElement success=driver.findElement(login.getPrintSuccessmsg());
+		String print=success.getText();
+		System.out.println(print);	
+	}
+	@After
 	public void tearDown() {
-		driver.close();
+		driver.quit();
 	}
 
 }

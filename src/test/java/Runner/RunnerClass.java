@@ -12,7 +12,7 @@ import io.cucumber.junit.CucumberOptions;
 		glue="AllSteps",
 		dryRun=false,
 		monochrome=true,
-		tags="@Tag1",
+		tags="@Tag",
 		plugin= {"pretty","html:target/Reports/report1.html"}
 		
 		
