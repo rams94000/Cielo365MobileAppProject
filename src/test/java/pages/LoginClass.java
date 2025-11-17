@@ -24,9 +24,13 @@ public class LoginClass {
     private By EnterRegisterdEmail=By.xpath("//android.widget.EditText");
     private By ClickOnSendButton=By.xpath("//android.widget.Button");
     private By PrintSuccessmsg=By.xpath("//android.widget.TextView[@text=\"Didn't receive the link?\"]");
+    private By ErrormsgEmail=By.xpath("//android.widget.TextView[@text=\"Enter valid email.\"]");
+  
     
     
-    
+	public By getErrormsgEmail() {
+		return ErrormsgEmail;
+	}
 	public By getPrintSuccessmsg() {
 		return PrintSuccessmsg;
 	}

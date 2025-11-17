@@ -5,15 +5,19 @@ import java.net.URI;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -54,8 +58,7 @@ public class AllStepsClass extends ParentClass {
 	@Given("Click on Signin button")
 	public void click_on_signin_button() throws InterruptedException {
 		Thread.sleep(5000);
-	    driver.findElement(login.getClick_On_SignIn_Btn()).click();
-		
+	    driver.findElement(login.getClick_On_SignIn_Btn()).click();	
 	}
 	@Given("Select the company")
 	public void select_the_company() throws InterruptedException {
@@ -102,6 +105,21 @@ public class AllStepsClass extends ParentClass {
 		WebElement success=driver.findElement(login.getPrintSuccessmsg());
 		String print=success.getText();
 		System.out.println(print);	
+	}
+	@Given("Enter wrong email in email text field")
+	public void enter_wrong_email_in_email_text_field() {
+	Wait<AndroidDriver> wait = new FluentWait<>(driver)
+		        .withTimeout(Duration.ofSeconds(30))
+		        .pollingEvery(Duration.ofMillis(500))
+		        .ignoring(NoSuchElementException.class);
+	 WebElement wrongEmail = wait.until(driver ->driver.findElement(login.getEnterRegisterdEmail()));
+	 wrongEmail.sendKeys(enterEmail());	
+	}
+	@Then("User should be able to view error message")
+	public void user_should_be_able_to_view_error_message() throws InterruptedException {
+	WebElement element=driver.findElement(login.getErrormsgEmail());
+	String error=element.getText();
+	System.out.println(error);	
 	}
 	@After
 	public void tearDown() {

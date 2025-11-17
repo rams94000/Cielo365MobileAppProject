@@ -12,4 +12,10 @@ And Click on forgot password
 And Enter registered email in email text field
 And Click on send button
 Then User should be able to receive email
+@Tag3
+Scenario: Verify whether after enetring the wrong email and hit the send button user is able to view proper error message
+And Click on forgot password
+And Enter wrong email in email text field
+And Click on send button
+Then User should be able to view error message
   
